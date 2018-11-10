@@ -38,12 +38,13 @@ public class PetOwner {
 	private Date dateCreated;
 	
 	@Column(name="date_of_birth")
-	private String dob;
+	private Date dob;
 	
 	@Column(name="apartment_number")
 	private int apartmentNumber;
 	
-	private boolean active;
+	@Column(name="active")
+	private boolean isActive;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="owner")
@@ -81,11 +82,11 @@ public class PetOwner {
 		this.dateCreated = dateCreated;
 	}
 
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
@@ -97,12 +98,14 @@ public class PetOwner {
 		this.apartmentNumber = apartmentNumber;
 	}
 
+
+	
 	public boolean isActive() {
-		return active;
+		return isActive;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -129,7 +132,7 @@ public class PetOwner {
 	
 	
 
-	public PetOwner(int id, String firstName, String lastName, Date dateCreated, String dob, int apartmentNumber,
+	public PetOwner(int id, String firstName, String lastName, Date dateCreated, Date dob, int apartmentNumber,
 			boolean active, List<Pet> pets) {
 		super();
 		this.id = id;
@@ -138,7 +141,7 @@ public class PetOwner {
 		this.dateCreated = dateCreated;
 		this.dob = dob;
 		this.apartmentNumber = apartmentNumber;
-		this.active = active;
+		this.isActive = active;
 		this.pets = pets;
 	}
 
@@ -153,14 +156,14 @@ public class PetOwner {
 	@Override
 	public String toString() {
 		return "PetOwner [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateCreated="
-				+ dateCreated + ", dob=" + dob + ", apartmentNumber=" + apartmentNumber + ", active=" + active + "]";
+				+ dateCreated + ", dob=" + dob + ", apartmentNumber=" + apartmentNumber + ", active=" + isActive + "]";
 	}
 
 	public PetOwner() {
 		super();
 	}
 
-	public PetOwner(int id, String firstName, String lastName, Date dateCreated, String dob, int apartmentNumber,
+	public PetOwner(int id, String firstName, String lastName, Date dateCreated, Date dob, int apartmentNumber,
 			boolean active) {
 		super();
 		this.id = id;
@@ -169,7 +172,7 @@ public class PetOwner {
 		this.dateCreated = dateCreated;
 		this.dob = dob;
 		this.apartmentNumber = apartmentNumber;
-		this.active = active;
+		this.isActive = active;
 	}
 	
 	
