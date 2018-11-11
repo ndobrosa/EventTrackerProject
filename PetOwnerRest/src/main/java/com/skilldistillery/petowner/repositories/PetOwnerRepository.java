@@ -1,4 +1,4 @@
-package com.skilldistillery.petowner.services;
+package com.skilldistillery.petowner.repositories;
 
 import java.util.Date;
 import java.util.List;
@@ -13,8 +13,10 @@ public interface PetOwnerRepository extends JpaRepository<PetOwner, Integer> {
 	List<PetOwner> findByDateCreated(Date date);
 	List<PetOwner> findByDob(Date date);
 	List<PetOwner> findByApartmentNumber(int number);
-	List<PetOwner> findByIsActive(Boolean active);
+	List<PetOwner> findByIsActive(boolean active);
 	PetOwner findByPets_Id(int id);
+	
+	
 	
 	
 }

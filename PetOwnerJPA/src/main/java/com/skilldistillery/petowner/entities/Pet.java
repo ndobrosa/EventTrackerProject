@@ -1,5 +1,7 @@
 package com.skilldistillery.petowner.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,10 +33,18 @@ public class Pet {
 	
 	private String breed;
 	
-	private int age;
+	private Integer age;
 	
 	@Column(name="is_on_property")
 	private boolean isOnProperty;
+	
+	@Column(name="movein_date")
+	private Date moveInDate;
+	
+	@Column(name="moveout_date")
+	private Date moveOutDate;
+	
+	private Integer rent;
 
 	public int getId() {
 		return id;
@@ -114,10 +124,39 @@ public class Pet {
 		return true;
 	}
 
+	
+	
+	public int getRent() {
+		return rent;
+	}
+
+	public void setRent(int rent) {
+		this.rent = rent;
+	}
+
+	public Date getMoveInDate() {
+		return moveInDate;
+	}
+
+	public void setMoveInDate(Date moveInDate) {
+		this.moveInDate = moveInDate;
+	}
+
+	public Date getMoveOutDate() {
+		return moveOutDate;
+	}
+
+	public void setMoveOutDate(Date moveOutDate) {
+		this.moveOutDate = moveOutDate;
+	}
+	
+	
+
 	@Override
 	public String toString() {
-		return "Pet [id=" + id + ", owner=" + owner.getFirstName() + " " + owner.getLastName() + ", name=" + name + ", animalType=" + animalType + ", breed="
-				+ breed + ", age=" + age + ", isOnProperty=" + isOnProperty + "]";
+		return "Pet [id=" + id + ", name=" + name + ", animalType=" + animalType + ", breed=" + breed + ", age=" + age
+				+ ", isOnProperty=" + isOnProperty + ", moveInDate=" + moveInDate + ", moveOutDate=" + moveOutDate
+				+ ", Rent=" + rent + "]";
 	}
 
 	public Pet() {

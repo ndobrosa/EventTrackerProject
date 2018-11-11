@@ -41,12 +41,12 @@ public class PetOwner {
 	private Date dob;
 	
 	@Column(name="apartment_number")
-	private int apartmentNumber;
+	private Integer apartmentNumber;
 	
 	@Column(name="active")
 	private boolean isActive;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy="owner")
 	private List<Pet> pets;
 
@@ -90,7 +90,7 @@ public class PetOwner {
 		this.dob = dob;
 	}
 
-	public int getApartmentNumber() {
+	public Integer getApartmentNumber() {
 		return apartmentNumber;
 	}
 

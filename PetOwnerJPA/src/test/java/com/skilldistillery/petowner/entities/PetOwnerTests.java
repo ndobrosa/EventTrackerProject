@@ -52,9 +52,9 @@ class PetOwnerTests {
 		assertEquals(1, petOwner.getId());
 		assertEquals("Jason", petOwner.getFirstName());
 		assertEquals("Melody", petOwner.getLastName());
-		assertEquals("2018-11-09 19:46:04", petOwner.getDateCreated().toString().substring(0, 19));
+		assertEquals("2018-11-10", petOwner.getDateCreated().toString().substring(0, 10));
 		assertEquals("1960-11-11", petOwner.getDob().toString().substring(0, 10));
-		assertEquals(23, petOwner.getApartmentNumber());
+		assertEquals(23, petOwner.getApartmentNumber().intValue());
 		assertEquals(true, petOwner.isActive());
 		assertEquals(3, petOwner.getPets().size());
 	}
