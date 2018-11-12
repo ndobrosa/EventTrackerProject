@@ -42,18 +42,19 @@ A user can create, update, replace, view one, view all, or delete pets.
 Also, a user can also look up all pets owned by a particular owner using owner's id. They can also search by animal type (e.g., all dogs on property). A user can look up all pets that moved in, as well as all pets that moved out in a user-specified date range. Finally, they can also retrieve a list of all pets in a certain pet-rent range where a user provides minimum and maximum.
 
 #### Routes
-* GET: api/pets - view all pets.
+* GET: api/pets
+  - view all pets.
 * GET: api/pets/{id}  
-- view a single pet, use id values 1-6
+  - view a single pet, use id values 1-6
 * POST: api/pets
-- create a new pet
+  - create a new pet
 * DELETE: pets/{id}
-- deletes a pet
+  - deletes a pet
 * PATCH: pets/{id}
-- replaces only fields that do not equal null
+  - replaces only fields that do not equal null
 * PATCH: pets/{id}
-- replaces all fields in the pet object. Make sure to provide an Owner input with id.
-- moveout_date, rent, and age are not required (can be null).
+  - replaces all fields in the pet object. Make sure to provide an Owner input with id.
+  - moveout_date, rent, and age are not required (can be null).
 *
 *
 *
