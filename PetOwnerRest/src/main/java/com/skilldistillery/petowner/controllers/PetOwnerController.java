@@ -27,11 +27,13 @@ public class PetOwnerController {
 	@Autowired
 	PetOwnerService petOwnerService;
 
+	//Show all petowners
 	@RequestMapping(path = "petowners", method = RequestMethod.GET)
 	public List<PetOwner> index() {
 		return petOwnerService.showAllOwners();
 	}
 
+	// find a single pet owner by id
 	@RequestMapping(path = "petowners/{id}", method = RequestMethod.GET)
 	public PetOwner show(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
 		PetOwner petOwner = petOwnerService.findById(id);
@@ -45,6 +47,8 @@ public class PetOwnerController {
 		return petOwner;
 	}
 
+	
+	// Insert a new owner
 	@PostMapping("petowners")
 	public String create(@RequestBody PetOwner newPetOwner, HttpServletRequest req, HttpServletResponse resp) {
 
@@ -65,6 +69,7 @@ public class PetOwnerController {
 		return responseBody;
 	}
 
+	// delete an owner from the DB
 	@DeleteMapping("petowners/{id}")
 	public String delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
 
@@ -78,6 +83,7 @@ public class PetOwnerController {
 		return responseBody;
 	}
 
+	// Patch an owner
 	@PatchMapping("petowners/{id}")
 	public String update(@RequestBody PetOwner updatedPetOwner, @PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -98,6 +104,7 @@ public class PetOwnerController {
 		return responseBody;
 	}
 	
+	// replace an owner (put)
 	@PutMapping("petowners/{id}")
 	public String replace(@RequestBody PetOwner updatedPetOwner, @PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -120,11 +127,13 @@ public class PetOwnerController {
 		return responseBody;
 	}
 	
+	// get owners who live on property (are active)
 	@GetMapping("petowners/active")
 	public List<PetOwner> getActive() {
 		return petOwnerService.findActive();
 	}
 	
+	// set whether an owner is active
 	@PutMapping("petowners/{id}/active/{active}")
 	public String setActive( @PathVariable("id") int id, @PathVariable("active") boolean active, HttpServletRequest req,
 			HttpServletResponse resp) {

@@ -34,11 +34,13 @@ public class PetController {
 	@Autowired
 	PetOwnerService petOwnerService;
 	
+	// Retrieve all pets from the database.
 	@RequestMapping(path="pets", method=RequestMethod.GET)
 	public List<Pet> index() {
 		return petService.showAllPets();
 	}
 	
+	// Retrieve a single pet from the database
 	@RequestMapping(path="pets/{id}", method=RequestMethod.GET)
 	public Pet show(@PathVariable("id") int id, HttpServletResponse resp) {
 		Pet pet = petService.findById(id);
@@ -52,6 +54,7 @@ public class PetController {
 		return pet;
 	}
 	
+	// Creates a pet in the database
 	@PostMapping("pets")
 	public String create(@RequestBody Pet newPet, HttpServletRequest req, HttpServletResponse resp) {
 
@@ -72,6 +75,7 @@ public class PetController {
 		return responseBody;
 	}
 
+	// removes a pet from the DB
 	@DeleteMapping("pets/{id}")
 	public String delete(@PathVariable("id") int id, HttpServletRequest req, HttpServletResponse resp) {
 
@@ -86,6 +90,7 @@ public class PetController {
 		return responseBody;
 	}
 	
+	// patches a pet
 	@PatchMapping("pets/{id}")
 	public String update(@RequestBody Pet updatedPet, @PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -106,6 +111,7 @@ public class PetController {
 		return responseBody;
 	}
 	
+	// puts a new pet instead of the old one, keeps the same id. Make sure to also provide owner object with an existing id in Postman.
 	@PutMapping("pets/{id}")
 	public String replace(@RequestBody Pet updatedPet, @PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -127,7 +133,7 @@ public class PetController {
 		return responseBody;
 	}
 	
-	//findByOwner
+	// finds all pets owned by a certain owner
 	@GetMapping("pets/petowner/{id}")
 	public List<Pet> findByOwner(@PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -141,7 +147,7 @@ public class PetController {
 		return petService.findByOwner(id);
 	}
 	
-//	findByType
+	// e.g. find all pets that are cats
 	@GetMapping("pets/type/{type}")
 	public List<Pet> findByAnimalType(@PathVariable("type") String type, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -155,8 +161,7 @@ public class PetController {
 		return petService.getPetsOnProperty(isResiding);
 	}
 	
-	// findByMoveInDate
-	
+	// retrieves all pets that moved in during a certain period
 	@GetMapping("pets/movein/{from}/{until}")
 	public List<Pet> findByMoveInDate(@PathVariable("from") String fromString,@PathVariable("until") String untilString, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -176,6 +181,7 @@ public class PetController {
 		return petService.findByMoveInDate(from, until);
 	}
 	
+	// retrieves all pets that moved out during a certain period
 	@GetMapping("pets/moveout/{from}/{until}")
 	public List<Pet> findByMoveOutDate(@PathVariable("from") String fromString,@PathVariable("until") String untilString, HttpServletRequest req,
 			HttpServletResponse resp) {
