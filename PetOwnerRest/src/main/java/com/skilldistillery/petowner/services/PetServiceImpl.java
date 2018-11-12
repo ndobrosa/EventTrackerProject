@@ -17,12 +17,14 @@ public class PetServiceImpl implements PetService {
 	@Autowired
 	PetRepository petRepo;
 
+	// Retrieve all pets from the database.
 	@Override
 	public List<Pet> showAllPets() {
 
 		return petRepo.findAll();
 	}
 
+	// Retrieve a single pet from the database
 	@Override
 	public Pet findById(int id) {
 		Optional<Pet> petOpt = petRepo.findById(id);
@@ -34,11 +36,13 @@ public class PetServiceImpl implements PetService {
 		return pet;
 	}
 
+	// Creates a pet in the database
 	@Override
 	public Pet create(Pet pet) {
 		return petRepo.saveAndFlush(pet);
 	}
-
+	
+	// removes a pet from the DB
 	@Override
 	public boolean delete(int id) {
 		boolean deleted = false;
@@ -56,7 +60,7 @@ public class PetServiceImpl implements PetService {
 		return deleted;
 	}
 	
-	
+	// patches a pet
 	@Override
 	// put
 	public Pet update(Pet updatedPet, int id) {
@@ -101,7 +105,7 @@ public class PetServiceImpl implements PetService {
 		return originalPet;
 	}
 	
-	
+	// puts a new pet instead of the old one, keeps the same id.
 	@Override
 	public Pet replace(Pet updatedPet, int id) {
 		Pet originalPet = null;
@@ -109,10 +113,6 @@ public class PetServiceImpl implements PetService {
 		
 		if (opt.isPresent()) {
 			originalPet = opt.get();
-			
-//			if (updatedPet.getApartmentNumber() != null) {
-//				originalPet.setApartmentNumber(updatedPet.getApartmentNumber());
-//			}
 			
 				originalPet.setAge(updatedPet.getAge());
 				originalPet.setAnimalType(updatedPet.getAnimalType());
@@ -129,6 +129,7 @@ public class PetServiceImpl implements PetService {
 		return originalPet;
 	}
 
+	// finds all pets owned by a certain owner
 	@Override
 	public List<Pet> findByOwner(int id) {
 		List<Pet> petsByOwner = petRepo.findByOwner_Id(id);
@@ -136,36 +137,37 @@ public class PetServiceImpl implements PetService {
 		return petsByOwner;
 	}
 
+	// e.g. find all pets that are cats
 	@Override
 	public List<Pet> findByType(String type) {
 		List<Pet> petsByType = petRepo.findByAnimalType(type);
 		return petsByType;
 	}
 
+	//getPetsOnProperty
 	@Override
-	// findByIsOnProperty
 	public List<Pet> getPetsOnProperty(boolean isResiding) {
 		List<Pet> petsOnProperty = petRepo.findByIsOnProperty(isResiding);
 
 		return petsOnProperty;
 	}
 
+	// retrieves all pets that moved in during a certain period
 	@Override
-//	List<Pet> findByMoveInDateBetween(Date begin, Date end);
 	public List<Pet> findByMoveInDate(Date begin, Date end) {
 		List<Pet> petsByMoveInDateRange = petRepo.findByMoveInDateBetween(begin, end);
 		return petsByMoveInDateRange;
 	}
 
+	// retrieves all pets that moved out during a certain period
 	@Override
-//	List<Pet> findByMoveOutDateBetween(Date begin, Date end);
 	public List<Pet> findByMoveOutDate(Date begin, Date end) {
 		List<Pet> petsByMoveOutDateRange = petRepo.findByMoveOutDateBetween(begin, end);
 		return petsByMoveOutDateRange;
 	}
 
+	// retrieves a list of pets within a certain pet-rent range
 	@Override
-//	List<Pet> findByRentBetween(int min, int max);
 	public List<Pet> findByRent(int min, int max) {
 		List<Pet> petsByRent = petRepo.findByRentBetween(min, max);
 		return petsByRent;

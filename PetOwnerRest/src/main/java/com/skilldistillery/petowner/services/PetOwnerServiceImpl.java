@@ -19,12 +19,14 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 	@Autowired
 	PetRepository petRepo;
 
+	//Retrieves a list of all owners
 	@Override
 	public List<PetOwner> showAllOwners() {
 
 		return petOwnerRepo.findAll();
 	}
 
+	// read a single pet owner by id
 	@Override
 	public PetOwner findById(int id) {
 		Optional<PetOwner> petOwnerOpt = petOwnerRepo.findById(id);
@@ -37,11 +39,13 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return petOwner;
 	}
 
+	// Insert a new owner
 	@Override
 	public PetOwner create(PetOwner petOwner) {
 		return petOwnerRepo.saveAndFlush(petOwner);
 	}
 
+	// delete an owner from the DB
 	@Override
 	public boolean delete(int id) {
 		boolean deleted = false;
@@ -65,7 +69,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return deleted;
 	}
 
-	// put
+	// Patch an owner
 	@Override
 	public PetOwner update(PetOwner updatedPetOwner, int id) {
 		PetOwner originalPetOwner = null;
@@ -92,7 +96,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return originalPetOwner;
 	}
 
-	// patch
+	// replace an owner (put)
 	@Override
 	public PetOwner replace(PetOwner updatedPetOwner, int id) {
 
@@ -112,11 +116,13 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 		return originalPetOwner;
 	}
 	
+	// get owners who live on property (are active)
 	@Override
 	public List<PetOwner> findActive() {
 		return petOwnerRepo.findByIsActive(true);
 	}
 	
+	// set whether an owner is active
 	@Override
 	public PetOwner setActive(int id, boolean active) {
 		Optional<PetOwner> opt = petOwnerRepo.findById(id);

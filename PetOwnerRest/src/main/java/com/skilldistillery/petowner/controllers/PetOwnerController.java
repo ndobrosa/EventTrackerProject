@@ -56,6 +56,8 @@ public class PetOwnerController {
 		String responseBody = null;
 
 		if (newPetOwner.getId() != 0) {
+			
+			// sets a status to 'created' and returns a JSON response with result and a link to get the newly created owner
 			resp.setStatus(201);
 			String newResourceUrl = req.getRequestURL().toString() + newPetOwner.getId();
 			resp.setHeader("Location", newResourceUrl);
@@ -139,7 +141,6 @@ public class PetOwnerController {
 			HttpServletResponse resp) {
 		String responseBody = null;
 		if(petOwnerService.setActive(id, active) != null) {
-//			String newResourceUrl = req.getRequestURL().toString().substring(0, 5);
 			String newResourceUrl = "http://localhost:8083/api/petowners/" + id;
 			resp.setHeader("Location", newResourceUrl);
 			

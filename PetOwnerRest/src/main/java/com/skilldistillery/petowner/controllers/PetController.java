@@ -62,6 +62,8 @@ public class PetController {
 		String responseBody = null;
 
 		if (newPet.getId() != 0) {
+			
+			// sets a status to 'created' and returns a JSON response with result and a link to get the newly created pet
 			resp.setStatus(201);
 			String newResourceUrl = req.getRequestURL().toString() + "/" + newPet.getId();
 			resp.setHeader("Location", newResourceUrl);
@@ -154,7 +156,7 @@ public class PetController {
 		return petService.findByType(type);
 	}
 	
-	//getPetsOnProperty
+	//gets all Pets currently living on property (e.g. for rent collection purposes)
 	@GetMapping("pets/active/{isResiding}")
 	public List<Pet> findByAnimalsOnProperty(@PathVariable("isResiding") boolean isResiding, HttpServletRequest req,
 			HttpServletResponse resp) {
@@ -200,7 +202,8 @@ public class PetController {
 		
 		return petService.findByMoveOutDate(from, until);
 	}
-	//"pets/moveout/{from}/{until}"
+	
+	// retrieves a list of pets within a certain pet-rent range
 	@GetMapping("pets/rent/{minimum}/{maximum}")
 	public List<Pet> findByPetRent (@PathVariable("minimum") Integer min,@PathVariable("maximum") Integer max, HttpServletRequest req,
 			HttpServletResponse resp) {
