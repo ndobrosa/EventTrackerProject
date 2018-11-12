@@ -22,7 +22,6 @@ In the database, pet_owned table has the following fields: id (number, primary k
 
 A user can create, update, replace, view one, view all, or delete pets.
 Also, a user can also look up all pets owned by a particular owner using owner's id. They can also search by animal type (e.g., all dogs on property). A user can look up all pets that moved in, as well as all pets that moved out in a user-specified date range. Finally, they can also retrieve a list of all pets in a certain pet-rent range where a user provides minimum and maximum.
-
 #### Unimplemented methods
 Similarly to the owners, there are methods inside of the pet repository that have not yet been implemented. These include the ability to find pets by a keyword contained in the name, by breed and by age.
 
