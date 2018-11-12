@@ -55,7 +55,7 @@ public class PetOwnerController {
 			resp.setStatus(201);
 			String newResourceUrl = req.getRequestURL().toString() + newPetOwner.getId();
 			resp.setHeader("Location", newResourceUrl);
-			responseBody = "{ \"result\": \"created\", \"id\":" + newPetOwner.getId() + ",";
+			responseBody = "{ \"result\": \"created\", \"id\":" + "/" + newPetOwner.getId() + ",";
 			responseBody += "\"url\":\"" + newResourceUrl + "\"}";
 		} else {
 			responseBody = "\"result\": \"failed\"";
@@ -144,5 +144,11 @@ public class PetOwnerController {
 		
 		return responseBody;
 	}
+	
+	
+	
+	
+	
+	
 	
 }

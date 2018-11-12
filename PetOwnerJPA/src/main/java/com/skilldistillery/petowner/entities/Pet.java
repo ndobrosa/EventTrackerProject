@@ -21,7 +21,7 @@ public class Pet {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private PetOwner owner;
@@ -86,7 +86,7 @@ public class Pet {
 		this.breed = breed;
 	}
 
-	public int getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
@@ -126,7 +126,7 @@ public class Pet {
 
 	
 	
-	public int getRent() {
+	public Integer getRent() {
 		return rent;
 	}
 

@@ -48,9 +48,9 @@ class PetTests {
 		assertEquals("Leo", pet.getName());
 		assertEquals("DOG", pet.getAnimalType());
 		assertEquals("Shepherd Mix", pet.getBreed());
-		assertEquals(1, pet.getAge());
+		assertEquals(1, pet.getAge().intValue());
 		assertEquals(true, pet.isOnProperty());
-		assertEquals(50, pet.getRent());
+		assertEquals(50, pet.getRent().intValue());
 		assertEquals("2016-11-01", pet.getMoveInDate().toString().substring(0, 10));
 		assertNull(pet.getMoveOutDate());
 	}

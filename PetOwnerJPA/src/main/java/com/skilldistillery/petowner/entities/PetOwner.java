@@ -46,7 +46,7 @@ public class PetOwner {
 	@Column(name="active")
 	private boolean isActive;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy="owner")
 	private List<Pet> pets;
 
