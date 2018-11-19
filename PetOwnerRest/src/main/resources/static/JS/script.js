@@ -1,3 +1,12 @@
+// 		****************************  Work In Progress  ********************************
+// 		*		By November 26, 2018:												   *
+// 		* 			- JS functionality for Pet Class will be added					   *
+// 		* 			- JS functionality for PetOwner Class will be completed			   *
+// 		* 			- Angular front-end will be added								   *
+// 		* 			- Comments will be added to all methods							   *
+// 		********************************************************************************
+
+
 window.addEventListener('load', function(e) {
 	console.log('document loaded');
 	init();
@@ -193,8 +202,15 @@ function displayOwner(owner) {
 	button.setAttribute('name', 'update');
 	button.setAttribute('id', 'updateButton')
 	button.innerHTML = 'update';
-
+	form.appendChild(button)
+	
+	button = document.createElement('button');
+	button.setAttribute('name', 'delete');
+	button.setAttribute('id', 'deleteButton')
+	button.innerHTML = 'delete';
 	form.appendChild(button);
+	
+	
 	dataDiv.appendChild(form);
 
 	addPetUpdateListener(owner);
@@ -207,8 +223,15 @@ function addPetUpdateListener(owner) {
 		e.preventDefault(); // keeps refresh from happenning
 		updatePet(owner);
 	});
-
+	
+	button = document.getElementById("deleteButton");
+	button.addEventListener('click', function(e) {
+		e.preventDefault(); // keeps refresh from happenning
+		deletePet(owner);
+	});
+	
 }
+
 
 function updatePet(owner) {
 
@@ -257,24 +280,24 @@ function updatePet(owner) {
 	input.required = true;
 	form.appendChild(input);
 
-	form.appendChild(document.createElement('br'));
-	form.appendChild(document.createTextNode("Active: "));
-
-	input = document.createElement('select');
-	input.setAttribute('name', 'active');
-
-	var option = document.createElement('option');
-	option.setAttribute('value', true);
-	option.innerHTML = "Yes";
-	input.appendChild(option);
-
-	option = document.createElement('option');
-	option.setAttribute('value', false);
-	option.innerHTML = "No";
-	input.appendChild(option);
-
-	input.appendChild(option);
-	form.appendChild(input);
+//	form.appendChild(document.createElement('br'));
+//	form.appendChild(document.createTextNode("Active: "));
+//
+//	input = document.createElement('select');
+//	input.setAttribute('name', 'active');
+//
+//	var option = document.createElement('option');
+//	option.setAttribute('value', true);
+//	option.innerHTML = "Yes";
+//	input.appendChild(option);
+//
+//	option = document.createElement('option');
+//	option.setAttribute('value', false);
+//	option.innerHTML = "No";
+//	input.appendChild(option);
+//
+//	input.appendChild(option);
+//	form.appendChild(input);
 
 	form.appendChild(document.createElement('br'));
 	form.appendChild(document.createElement('br'));
@@ -294,23 +317,82 @@ function updatePet(owner) {
 
 function addPetUpdateExecuteListener(owner) {
 	var button = document.getElementById('executeUpdate');
-
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'api/petowners/' + owner.id);
-
-	xhr.setRequestHeader("Content-type", "application/json");
+	console.log(owner);
 
 	button.addEventListener('click', function(e) {
 		e.preventDefault(); // keeps refresh from happenning
 		console.log("inside");
 		var form = e.target.parentElement;
-		var owner = {
+		owner = {
+		id : owner.id,
 		firstName : form.fname.value,
 		lastName : form.lname.value,
 		dob : form.dob.value + "T07:00:00.000+0000",
 		apartmentNumber : form.apartment.value,
-		active : form.active.value
+		//active : form.active.value
 		}
-		createOwner(owner);
+		finishOwnerUpdate(owner);
 	});
+	
+	
+	
 }
+
+
+function finishOwnerUpdate(owner){
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('PATCH', 'api/petowners/' + owner.id);
+
+	xhr.setRequestHeader("Content-type", "application/json"); // Declare that
+	// content type
+	// is JSOn
+
+	xhr.onreadystatechange = function() { // called by send method
+		console.log(this.readyState);
+		if (xhr.readyState === 4) {
+			console.log(xhr.status);
+			if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
+				var data = JSON.parse(xhr.responseText);
+				getPetOwner(owner.id);
+			} else {
+				console.log("PATCH request failed.");
+				console.error(xhr.status + ': ' + xhr.responseText);
+			}
+		}
+	};
+
+	var ownerJson = JSON.stringify(owner); // Convert JS object to JSON string
+
+	xhr.send(ownerJson);
+}
+
+
+
+function deletePet(owner) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('DELETE', 'api/petowners/' + owner.id);
+
+	xhr.setRequestHeader("Content-type", "application/json");
+	
+	xhr.onreadystatechange = function() { // called by send method
+		console.log(this.readyState);
+		if (xhr.readyState === 4) {
+			console.log(xhr.status);
+			if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
+				var data = JSON.parse(xhr.responseText);
+				getPetOwner(owner.id);
+			} else {
+				console.log("Delete request failed.");
+				console.error(xhr.status + ': ' + xhr.responseText);
+			}
+		}
+	};
+
+	// var ownerJson = JSON.stringify(owner); // Convert JS object to JSON string
+
+	xhr.send();
+}
+
+
+
