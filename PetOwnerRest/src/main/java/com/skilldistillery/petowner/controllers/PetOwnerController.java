@@ -51,7 +51,7 @@ public class PetOwnerController {
 	// Insert a new owner
 	@PostMapping("petowners")
 	public String create(@RequestBody PetOwner newPetOwner, HttpServletRequest req, HttpServletResponse resp) {
-
+		System.out.println(newPetOwner.getDob());
 		newPetOwner = petOwnerService.create(newPetOwner);
 		String responseBody = null;
 
@@ -59,9 +59,9 @@ public class PetOwnerController {
 			
 			// sets a status to 'created' and returns a JSON response with result and a link to get the newly created owner
 			resp.setStatus(201);
-			String newResourceUrl = req.getRequestURL().toString() + newPetOwner.getId();
+			String newResourceUrl = req.getRequestURL().toString() + "/" + newPetOwner.getId();
 			resp.setHeader("Location", newResourceUrl);
-			responseBody = "{ \"result\": \"created\", \"id\":" + "/" + newPetOwner.getId() + ",";
+			responseBody = "{ \"result\": \"created\", \"id\":" + newPetOwner.getId() + ",";
 			responseBody += "\"url\":\"" + newResourceUrl + "\"}";
 		} else {
 			responseBody = "\"result\": \"failed\"";
