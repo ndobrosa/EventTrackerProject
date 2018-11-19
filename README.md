@@ -1,7 +1,18 @@
 ## Event Tracker Project
 
 ### Overview
-This project is the back-end for a RESTful web app that allows an apartment complex to keep track of pets and their owners.
+This Project is Work-In-Progress. It is a web app that allows an apartment complex to keep track of pets and their owners.
+I will keep working on it during weekends and have main goals completed by November 26, 2018.
+
+#### So far the project includes:
+  * Java and Spring Back-end for a RESTful web app
+  * Basic CRUD functionality enabled in front-end for 1 of 2 classes (User can create/edit/remove owners of pets, but not pets) using JavaScript and HTML5. Front-end will be improved using Angular and CSS.
+  * Database built with MySQL Workbench
+
+#### To be completed by November 26, 2018
+  * Build dynamic front-end that allows the user to perform all CRUD operations for PetOwner and Pet classes using JavaScript, Angular, and CSS.
+  * Write tests for Service and Controller classes (currently only tested in Postman).
+
 
 The database contains two tables - one holding information about pets on the property and the other holding info about the owners. The backend is designed to have two of each - JPA entities, repositories, service interfaces and implementation classes, and controllers.
 JPA Repository methods allow the user to create, update, edit (put and patch), and delete pets and pet owners. Also, the user can do multiple other searches, such as search pet by rent range, move in date, etc.
@@ -10,7 +21,7 @@ Controller paths currently work in Postman. Over the next couple of weeks, I int
 
 ####
 Deployed at: http://18.188.120.152:8080/PetOwnerRest/
-Use routes to (see under Pet and Pet Owner Functionality) to access data. Front end not yet created.
+Use routes to (see under Pet and Pet Owner Functionality) to access data. The front end not yet created.
 
 ### Pet Owner Functionality
 In the database, pet_owner table has the following fields: id (number, primary key), first_name (text), last_name (text), date_of_birth (date), apartment_number(number), and active (boolean).
@@ -111,10 +122,14 @@ Also, a user can also look up all pets owned by a particular owner using owner's
 #### Unimplemented methods
 Similarly to the owners, there are methods inside of the pet repository that have not yet been implemented. These include the ability to find pets by a keyword contained in the name, by breed and by age.
 
+### Front-end
+The front-end will be built using JS, Angular, CSS, and HTML. Currently, the front-end has limited functionality and has not yet been styled.
+
 ### Technologies used
 * RESTful API
 * JSON API
 * Java
+* JavaScript
 * SQL
 * UNIX
 * MySQL Workbench
@@ -125,9 +140,3 @@ Similarly to the owners, there are methods inside of the pet repository that hav
 * Gradle
 * JUnit Jupiter
 * AWS
-
-### Stretch goals
-This project is work-in-progress, and I am likely to continue working on it over the next couple of weekends. The following are the essential next steps.
-* Write tests Service and Controller classes (currently only tested in Postman).
-* Add unimplemented methods.
-* Develop dynamic front-end using JavaScript.
