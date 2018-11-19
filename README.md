@@ -19,9 +19,9 @@ JPA Repository methods allow the user to create, update, edit (put and patch), a
 
 Controller paths currently work in Postman. Over the next couple of weeks, I intend to develop the front-end using JavaScript, Angular, HTML and CSS.
 
-####
-Deployed at: http://18.188.120.152:8080/PetOwnerRest/
-Use routes to (see under Pet and Pet Owner Functionality) to access data. The front end not yet created.
+#### Deployed at: http://18.188.120.152:8080/PetOwnerRest/
+Website may be down due to maintenance/updating.
+The front end functionality has not yet been integrated for all of the routes.
 
 ### Pet Owner Functionality
 In the database, pet_owner table has the following fields: id (number, primary key), first_name (text), last_name (text), date_of_birth (date), apartment_number(number), and active (boolean).
