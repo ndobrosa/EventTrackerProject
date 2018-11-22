@@ -26,7 +26,7 @@ group = 'com.skilldistillery.petowner'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
-project.webAppDirName = 'src/main/resources/static'
+// project.webAppDirName = 'src/main/resources/static'
 
 repositories {
 	mavenCentral()

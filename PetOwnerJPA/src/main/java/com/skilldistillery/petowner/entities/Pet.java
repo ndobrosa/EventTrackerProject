@@ -13,15 +13,20 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/*
+ * Entity mapped according to the table in the relational database
+ */
 @Entity
 @Table(name = "pet_owned")
 public class Pet {
 
+	//fields
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-//	@JsonIgnore
+//	@JsonIgnore commented out. Pets will have an owner mapped, 
+//	but the owner will not have pets to avoid recursion.
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	private PetOwner owner;
@@ -46,6 +51,9 @@ public class Pet {
 	
 	private Integer rent;
 
+	
+	
+	// getters and setters
 	public int getId() {
 		return id;
 	}
@@ -101,31 +109,6 @@ public class Pet {
 	public void setOnProperty(boolean isOnProperty) {
 		this.isOnProperty = isOnProperty;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pet other = (Pet) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
-
-	
-	
 	public Integer getRent() {
 		return rent;
 	}
@@ -150,7 +133,35 @@ public class Pet {
 		this.moveOutDate = moveOutDate;
 	}
 	
+
 	
+	// hashcode and equal;s using id which is a uniqe value
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pet other = (Pet) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	
+	
+	
+	// to string, no-arg constructor, fully loaded constructor
 
 	@Override
 	public String toString() {

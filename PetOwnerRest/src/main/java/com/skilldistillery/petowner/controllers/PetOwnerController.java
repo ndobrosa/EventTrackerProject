@@ -27,7 +27,13 @@ public class PetOwnerController {
 	@Autowired
 	PetOwnerService petOwnerService;
 
-	//Show all petowners
+	// Show all petowners
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
+	public String ping() {
+		return "pong";
+	}
+
+	// Show all petowners
 	@RequestMapping(path = "petowners", method = RequestMethod.GET)
 	public List<PetOwner> index() {
 		return petOwnerService.showAllOwners();
@@ -47,7 +53,6 @@ public class PetOwnerController {
 		return petOwner;
 	}
 
-	
 	// Insert a new owner
 	@PostMapping("petowners")
 	public String create(@RequestBody PetOwner newPetOwner, HttpServletRequest req, HttpServletResponse resp) {
@@ -56,8 +61,9 @@ public class PetOwnerController {
 		String responseBody = null;
 
 		if (newPetOwner.getId() != 0) {
-			
-			// sets a status to 'created' and returns a JSON response with result and a link to get the newly created owner
+
+			// sets a status to 'created' and returns a JSON response with result and a link
+			// to get the newly created owner
 			resp.setStatus(201);
 			String newResourceUrl = req.getRequestURL().toString() + "/" + newPetOwner.getId();
 			resp.setHeader("Location", newResourceUrl);
@@ -92,28 +98,28 @@ public class PetOwnerController {
 		PetOwner originalPetOwner = petOwnerService.findById(id);
 		String responseBody = null;
 
-			if (originalPetOwner != null && petOwnerService.update(updatedPetOwner, id) != null) {
+		if (originalPetOwner != null && petOwnerService.update(updatedPetOwner, id) != null) {
 
-				resp.setStatus(200);
-				String newResourceUrl = req.getRequestURL().toString();
-				resp.setHeader("Location", newResourceUrl);
-				responseBody = "{ \"result\": \"patched\",";
-				responseBody += "\"url\":\"" + newResourceUrl + "\"}";
-			} else {
-				responseBody = "\"result\": \"failed\"";
-				resp.setStatus(406);
-			}
+			resp.setStatus(200);
+			String newResourceUrl = req.getRequestURL().toString();
+			resp.setHeader("Location", newResourceUrl);
+			responseBody = "{ \"result\": \"patched\",";
+			responseBody += "\"url\":\"" + newResourceUrl + "\"}";
+		} else {
+			responseBody = "\"result\": \"failed\"";
+			resp.setStatus(406);
+		}
 		return responseBody;
 	}
-	
+
 	// replace an owner (put)
 	@PutMapping("petowners/{id}")
 	public String replace(@RequestBody PetOwner updatedPetOwner, @PathVariable("id") int id, HttpServletRequest req,
 			HttpServletResponse resp) {
-		
+
 		PetOwner originalPetOwner = petOwnerService.findById(id);
 		String responseBody = null;
-		
+
 		if (originalPetOwner != null && petOwnerService.replace(updatedPetOwner, id) != null) {
 			resp.setStatus(200);
 			String newResourceUrl = req.getRequestURL().toString();
@@ -124,41 +130,33 @@ public class PetOwnerController {
 			responseBody = "\"result\": \"failed\"";
 			resp.setStatus(406);
 		}
-		
-		
+
 		return responseBody;
 	}
-	
+
 	// get owners who live on property (are active)
 	@GetMapping("petowners/active")
 	public List<PetOwner> getActive() {
 		return petOwnerService.findActive();
 	}
-	
+
 	// set whether an owner is active
 	@PutMapping("petowners/{id}/active/{active}")
-	public String setActive( @PathVariable("id") int id, @PathVariable("active") boolean active, HttpServletRequest req,
+	public String setActive(@PathVariable("id") int id, @PathVariable("active") boolean active, HttpServletRequest req,
 			HttpServletResponse resp) {
 		String responseBody = null;
-		if(petOwnerService.setActive(id, active) != null) {
+		if (petOwnerService.setActive(id, active) != null) {
 			String newResourceUrl = "http://localhost:8083/api/petowners/" + id;
 			resp.setHeader("Location", newResourceUrl);
-			
+
 			responseBody = "{ \"result\": \"changed\",";
 			responseBody += "\"url\":\"" + newResourceUrl + "\"}";
-		}
-		else {
+		} else {
 			responseBody = "\"result\": \"failed\"";
 			resp.setStatus(406);
 		}
-		
+
 		return responseBody;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

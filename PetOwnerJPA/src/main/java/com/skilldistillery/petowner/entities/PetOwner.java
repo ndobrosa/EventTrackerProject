@@ -17,10 +17,14 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/*
+ * Entity mapped according to the table in the relational database
+ */
 @Entity
 @Table(name = "pet_owner")
 public class PetOwner {
 		
+	// Fields mapped to the DB
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,10 +50,12 @@ public class PetOwner {
 	@Column(name="active")
 	private boolean isActive;
 	
+	// JsonIgnore added to avoid recursion
 	@JsonIgnore
 	@OneToMany(mappedBy="owner")
 	private List<Pet> pets;
 
+	// Getters and setters
 	public int getId() {
 		return id;
 	}
@@ -107,7 +113,15 @@ public class PetOwner {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
+	public List<Pet> getPets() {
+		return pets;
+	}
 
+	public void setPets(List<Pet> pets) {
+		this.pets = pets;
+	}
+
+	// hashcode and equals based on id which has to be a unique value
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,7 +145,7 @@ public class PetOwner {
 	}
 	
 	
-
+	// constructor with all fields and no-arg constructor
 	public PetOwner(int id, String firstName, String lastName, Date dateCreated, Date dob, int apartmentNumber,
 			boolean active, List<Pet> pets) {
 		super();
@@ -145,13 +159,10 @@ public class PetOwner {
 		this.pets = pets;
 	}
 
-	public List<Pet> getPets() {
-		return pets;
+	public PetOwner() {
+		super();
 	}
-
-	public void setPets(List<Pet> pets) {
-		this.pets = pets;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -159,10 +170,7 @@ public class PetOwner {
 				+ dateCreated + ", dob=" + dob + ", apartmentNumber=" + apartmentNumber + ", active=" + isActive + "]";
 	}
 
-	public PetOwner() {
-		super();
-	}
-
+	// cosntructor with required fields in the db
 	public PetOwner(int id, String firstName, String lastName, Date dateCreated, Date dob, int apartmentNumber,
 			boolean active) {
 		super();
