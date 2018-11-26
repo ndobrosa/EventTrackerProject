@@ -10,7 +10,11 @@ I will keep working on it during weekends and have main goals completed by Novem
   * Database built with MySQL Workbench
 
 #### To be completed by November 26, 2018
-  * Build dynamic front-end that allows the user to perform all CRUD operations for PetOwner and Pet classes using JavaScript, Angular, and CSS.
+  * Build dynamic front-end that allows the user to perform all CRUD operations for PetOwner and Pet classes using JavaScript.
+
+#### Stretch goals:
+  * Refactor front-end using Angular
+  * Beautify front-end using CSS
   * Write tests for Service and Controller classes (currently only tested in Postman).
 
 

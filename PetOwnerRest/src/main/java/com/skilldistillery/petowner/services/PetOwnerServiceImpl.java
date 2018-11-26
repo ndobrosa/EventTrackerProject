@@ -54,7 +54,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
 			PetOwner petOwner = opt.get();
 			List<Pet> petsOwned = petOwner.getPets();
 
-			// Consider changing with a method insice PetService
+			// Delete all pets.
+			// Consider changing with a method inside PetService
 			for (Pet pet : petsOwned) {
 				petRepo.delete(pet);
 			}
