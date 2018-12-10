@@ -1,8 +1,7 @@
 ## Event Tracker Project
 
 ### Overview
-This Project is Work-In-Progress. It is a web app that allows an apartment complex to keep track of pets and their owners.
-I will keep working on it during weekends and have main goals completed by November 26, 2018.
+This Project  is a web app that allows an apartment complex to keep track of pets and their owners.
 
 #### So far the project includes:
   * Java and Spring Back-end for a RESTful web app
@@ -127,7 +126,7 @@ Also, a user can also look up all pets owned by a particular owner using owner's
 Similarly to the owners, there are methods inside of the pet repository that have not yet been implemented. These include the ability to find pets by a keyword contained in the name, by breed and by age.
 
 ### Front-end
-The front-end will be built using JS, Angular, CSS, and HTML. Currently, the front-end has limited functionality and has not yet been styled.
+The front-end was built using JS, Angular, CSS, and HTML. Currently, the front-end has limited functionality and has not yet been styled.
 
 ### Technologies used
 * RESTful API
